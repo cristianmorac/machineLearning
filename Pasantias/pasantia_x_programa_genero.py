@@ -17,13 +17,16 @@ def grafica_barra(dataframe, programa):
         plt.ylabel('Cantidad')
         plt.show()
 
-def categoria_programa(dataframe, programa, lista_programa):
+def categoria_programa(dataframe, lista_programa):
         
-        # filtrar por nombre del programa
-        programas = dataframe[dataframe['nombre_del_programa'] == programa]
-        # agrupar por genero
-        df2 = programas.groupby( by= ['nombre_del_programa','genero']).size().reset_index(name='count')
-        grafica_barra(df2,programa)
+        for p in lista_programa:
+          # filtrar por nombre del programa
+          programas = dataframe[dataframe['nombre_del_programa'] == p]
+          # agrupar por genero
+          df2 = programas.groupby( by= ['nombre_del_programa','genero']).size().reset_index(name='count')
+          # crear varias graficas
+          # print(p)
+          grafica_barra(df2,p)
 
 # Verificar que la solicitud fue exitosa
 if response.status_code == 200:
@@ -33,7 +36,5 @@ if response.status_code == 200:
 
     df = pd.DataFrame(data)
     lista_programa = df['nombre_del_programa'].unique()
-    print(lista_programa)
-
     # Generar grafica por programa
-    categoria_programa(df,'LIC. MATEMATICAS', lista_programa)
+    categoria_programa(df, lista_programa)
