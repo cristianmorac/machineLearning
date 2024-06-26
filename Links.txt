@@ -1,0 +1,9 @@
+# Documentación python
+https://ellibrodepython.com/diccionarios-en-python
+
+# Aprender Google colab
+https://colab.research.google.com/?hl=es#scrollTo=Nma_JWh-W-IF
+
+# link profe Google colab
+https://colab.research.google.com/drive/1TM9eL1808DJDHz11GaYF4AeMuiwN3Glt?authuser=1#scrollTo=byBnLAmoVhAR
+
