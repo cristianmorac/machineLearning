@@ -18,7 +18,7 @@ if response.status_code == 200:
     df = pd.DataFrame(data)
     print(df)
     # filtrar por Admin de negocios
-    admin_negocios = df[df['nombre_del_programa'] == 'ADMINISTRACION DE NEGOCIOS']
+    admin_negocios = df[df['nombre_del_programa'] == 'MEDICINA']
     #print(admin_negocios)
 
     # agrupar por genero

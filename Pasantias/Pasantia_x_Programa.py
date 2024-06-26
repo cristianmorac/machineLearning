@@ -17,8 +17,8 @@ def abreviaturas(dataframe, column):
         if len(p) > 2:
             list.add(p[0])
     
-    programas = {}
     # crear diccionario de programas
+    programas = {}
     for l in list:
         programas[l] = l[0:3]
 
