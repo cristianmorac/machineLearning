@@ -1,3 +1,8 @@
+"""
+script genera grafica de barras del programa
+y cuanto es la cantidad de pasantes por genero 
+"""
+
 import requests
 import pandas as pd
 import seaborn as sns

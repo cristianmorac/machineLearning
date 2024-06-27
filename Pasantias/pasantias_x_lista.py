@@ -1,7 +1,8 @@
+"""
+script para obtener el listado de los programas 
+"""
 import requests
 import pandas as pd
-import seaborn as sns
-import matplotlib.pyplot as plt
 
 # URL de la API
 url = "https://www.datos.gov.co/resource/pzt8-ws2b.json?$limit=7019"

@@ -1,3 +1,9 @@
+"""
+script que genera una tabla con las pasantias realizadas
+y las pasantias que menor se realizan y se cambian algunas
+palabras por sus abreviaturas  
+"""
+
 import requests
 import pandas as pd
 import matplotlib.pyplot as plt
