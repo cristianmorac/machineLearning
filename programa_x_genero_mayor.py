@@ -1,10 +1,25 @@
 import requests
 import pandas as pd
+import matplotlib.pyplot as plt
+
+""" 
+Script para conocer que programa tiene mayor oferta
+si es por hombres o mujeres
+"""
 
 # URL de la API
 url = "https://www.datos.gov.co/resource/pzt8-ws2b.json?$limit=7019"
 # Hacer la solicitud GET
 response = requests.get(url)
+
+def grafica_circular(datframe, genero):
+    
+    # crear el grafico circular
+    plt.figure(figsize=(8, 8))
+    plt.pie(datframe['count'], labels=datframe['nombre_del_programa'], autopct='%1.f%%', startangle=140, colors=plt.cm.Paired.colors)
+
+    plt.title(f'Pasantias por genero {genero}')
+    plt.show()
 
 if response.status_code == 200:
     # Obtener los datos en formato JSON
@@ -33,7 +48,10 @@ if response.status_code == 200:
             else:
                 dfhombre = dfhombre._append(masculino, ignore_index=True)
     
-        print(dfmujer.sort_values(by='count', ascending=False))
-        print(dfhombre.sort_values(by='count', ascending=False))
+        dfmujer = dfmujer.sort_values(by='count', ascending=False)
+        dfhombre = dfhombre.sort_values(by='count', ascending=False)
+
+        grafica_circular(dfmujer.head(10), 'Femenino')
+        grafica_circular(dfhombre.head(10), 'Masculino')
 
     validar_programa_mayor_genero(df,list_programas)
