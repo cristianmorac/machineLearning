@@ -61,7 +61,7 @@ if response.status_code == 200:
     dic = abreviaturas(def_stored, 'nombre_del_programa')
 
     # primeros 10 programas
-    grafica_circular(def_stored.head(10))
+    #grafica_circular(def_stored.head(10))
 
     # ultimos 10 programas
-    #grafica_cirfular(def_stored.tail(10))
+    grafica_circular(def_stored.tail(10))
