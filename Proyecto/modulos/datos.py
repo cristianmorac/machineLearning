@@ -18,5 +18,13 @@ replace_letra = {
     'Ã±': 'ñ'
 }
 
+datos_grafica = {
+    'columna_x' : '',
+    'columna_y' : '',
+    'title' : '',
+    'xlabel' : '',
+    'ylabel' : '',
+}
+
 # obtener todas las columnas
 columnas = data.columns.to_list()
