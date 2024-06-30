@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 import os
 
 # Especificar la ruta del archivo .xlsx
@@ -26,14 +27,15 @@ columnas = data.columns.to_list()
 def limpiar_datos(df,columns, dic):
     df[columns] = df[columns].replace(dic , regex=True)
 
-limpiar_datos(data,columnas,replace_letra)
+#limpiar_datos(data,columnas,replace_letra)
 
-def filas_nulas(df, palabra_drop, columna):
-        #df.drop(df[df[columna] == palabra_drop].index, inplace=True)
+def formateo_texto(df,palabra, columna):
+        #df.drop(df[df[columna] ==palabra].index, inplace=True)
     for c in columna:
-        df.drop(df[df[c] == palabra_drop].index, inplace=True)
+        df.drop(df[df[c] ==palabra].index, inplace=True)
 
-filas_nulas(data,'Sin datos',columnas)
-filas_nulas(data,0,columnas)
+formateo_texto(data,'Sin datos',columnas)
 
-print(data['CIU_NAC'].unique())
+# elminar datos nulos
+data = data.dropna()
+print(data.value_counts())
