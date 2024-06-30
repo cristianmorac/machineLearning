@@ -1,13 +1,15 @@
 import pandas as pd
+import os
 
 # Especificar la ruta del archivo .xlsx
-file_path = 'C:\\Users\\Cristian\\Documents\\CUN\\MachineLearning\\Resultados_Prueba_Saber_Pro.xlsx'
+archivo = 'Resultados_Prueba_Saber.xlsx'
+path = os.path.normpath(os.path.abspath(archivo))
+file_path = path
 
 # Leer el archivo Excel
 data = pd.read_excel(file_path)
 
 # limpiar datos
-
 replace_letra = {
     'Ã\x81': 'A',
     'Ã“': 'O',
@@ -24,12 +26,13 @@ columnas = data.columns.to_list()
 def limpiar_datos(df,columns, dic):
     df[columns] = df[columns].replace(dic , regex=True)
 
-# eliminar las filas que esten sin datos
-
 limpiar_datos(data,columnas,replace_letra)
 # filas_Sin_datos(data,'Sin datos',columnas )
 
 print(data['CIU_NAC'].unique())
+
+def eliminar_filas():
+    pass
 
 """
 # eliminar las filas que esten sin datos
