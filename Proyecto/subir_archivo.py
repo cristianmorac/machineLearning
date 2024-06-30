@@ -38,4 +38,3 @@ formateo_texto(data,'Sin datos',columnas)
 
 # elminar datos nulos
 data = data.dropna()
-print(data.value_counts())
