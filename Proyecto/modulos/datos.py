@@ -26,5 +26,13 @@ datos_grafica = {
     'ylabel' : '',
 }
 
+datos_grafica_barra = {
+    'columna_x' : '',
+    'columna_y' : '',
+    'title' : '',
+    'xlabel' : '',
+    'ylabel' : '',
+}
+
 # obtener todas las columnas
 columnas = data.columns.to_list()
