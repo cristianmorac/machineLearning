@@ -23,7 +23,7 @@ def Descriptiva(data,columna):
 #hombre = Genero(data,'Hombres')
 
 # Encontrar la media, mediana y desviacion
-data = Descriptiva(data,'EDAD')
+database = Descriptiva(data,'EDAD')
 
 # Agregar datos al diccionario
 datos_tag = ['EDAD', 'count', 'Edades de presentación del examen', 'Edad', 'Cantidad']

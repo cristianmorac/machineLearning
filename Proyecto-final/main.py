@@ -1,8 +1,8 @@
 from modulos import create_data as cd
 from modulos.graphics import grafica_barra
-from modulos.statistic_data import Descriptiva
+from modulos.statistic_data import Descriptiva, regresion_lineal
 from modulos.clean_data import limpiar_datos, filas_Sin_datos
-from modulos.datos import replace_letra,datos_grafica_barra, datos_tag
+from modulos.datos import replace_letra,datos_grafica_barra, datos_tag, estrato
 
 # Crear dataframe de archivo excel
 data = cd.create_dataframe()
@@ -21,10 +21,13 @@ data = filas_Sin_datos(data,'Sin datos',columnas)
 #print(data.isnull().sum())
 
 # Estadistica descriptiva
-data = Descriptiva(data,'EDAD')
+database = Descriptiva(data,'EDAD')
 # print(data)
 
 # Crear grafica de barras
-grafica_barra(data.head(20), datos_grafica_barra, datos_tag)
+#grafica_barra(data.head(20), datos_grafica_barra, datos_tag)
+
+data = limpiar_datos(data,columnas, estrato)
+regresion_lineal(data,'EDAD','PUNTAJE_GLOBAL')
 
 

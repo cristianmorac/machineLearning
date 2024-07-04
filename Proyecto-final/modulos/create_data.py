@@ -4,7 +4,7 @@ import pandas as pd
 def create_dataframe():
 
     # Especificar la ruta del archivo .xlsx
-    archivo = 'Resultados_Prueba_Saber_Pro.xlsx'
+    archivo = 'Resultados_Prueba_Saber.xlsx'
     path = os.path.normpath(os.path.abspath(archivo))
     file_path = path
     # Leer el archivo Excel

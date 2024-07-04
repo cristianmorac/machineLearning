@@ -18,6 +18,15 @@ replace_letra = {
     'Ã±': 'ñ'
 }
 
+estrato = {
+    'Estrato 6': 6,
+    'Estrato 5': 5,
+    'Estrato 4': 4,
+    'Estrato 3': 3,
+    'Estrato 2': 2,
+    'Estrato 1': 1,
+}
+
 datos_grafica = {
     'columna_x' : '',
     'columna_y' : '',
