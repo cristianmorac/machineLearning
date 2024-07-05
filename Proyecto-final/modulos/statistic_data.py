@@ -4,10 +4,11 @@ from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error, r2_score
 
 def Descriptiva(data,columna):
+    # Descriptiva(dataframe,'EDAD')
     database = data.groupby( by= [columna]).size().reset_index(name='count')
-    media = np.mean(data[columna])
-    mediana = np.median(data[columna])
-    desviacion_std = np.std(data[columna], ddof=1)
+    media = np.mean(data[columna]) # dataframe['EDAD']
+    mediana = np.median(data[columna]) # dataframe['EDAD']
+    desviacion_std = np.std(data[columna], ddof=1) # dataframe['EDAD']
     print(f'Database: media = {media:.2f}, desviación estándar = {desviacion_std:.2f}, mediana = {mediana:.2f}')
     return database
 
