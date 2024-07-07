@@ -25,9 +25,9 @@ database = Descriptiva(data,'EDAD')
 # print(data)
 
 # Crear grafica de barras
-grafica_barra(database.head(20), datos_grafica_barra, datos_tag)
+#grafica_barra(database.head(20), datos_grafica_barra, datos_tag)
 
-data = limpiar_datos(data,columnas, estrato)
-regresion_lineal(data,'EDAD','PUNTAJE_GLOBAL')
+#data = limpiar_datos(data,columnas, estrato)
+#regresion_lineal(data,'EDAD','PUNTAJE_GLOBAL')
 
 
