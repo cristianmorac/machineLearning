@@ -18,7 +18,7 @@ columna_y = 'PUNTAJE_GLOBAL'
 data[columna_y] = data[columna_y].astype(float)
 
 # Dividir los datos en entrenamiento y prueba
-X_train, X_test, y_train, y_test = train_test_split(data[[columna_x]], data[columna_y], test_size=0.2, random_state=20000)
+X_train, X_test, y_train, y_test = train_test_split(data[[columna_x]], data[columna_y], test_size=0.2, random_state=42)
 
 """ print("X_train:\n", X_train.head())
 print("X_test:\n", X_test.head())

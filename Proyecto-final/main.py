@@ -4,8 +4,11 @@ from modulos.statistic_data import Descriptiva, regresion_lineal
 from modulos.clean_data import limpiar_datos, filas_Sin_datos
 from modulos.datos import replace_letra,datos_grafica_barra, datos_tag, estrato
 
+# nombre del archivo
+archivo = 'Prueba_Saber.xlsx'
+
 # Crear dataframe de archivo excel
-data = cd.create_dataframe()
+data = cd.create_dataframe(archivo)
 
 # Formateo de datos
 
@@ -28,6 +31,6 @@ database = Descriptiva(data,'EDAD')
 #grafica_barra(database.head(20), datos_grafica_barra, datos_tag)
 
 #data = limpiar_datos(data,columnas, estrato)
-#regresion_lineal(data,'EDAD','PUNTAJE_GLOBAL')
+regresion_lineal(data,'PUNTAJE_GLOBAL','EDAD')
 
 
