@@ -8,6 +8,8 @@ from sklearn.datasets import load_iris
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import accuracy_score
 from sklearn.ensemble import RandomForestClassifier
+from modulos.datos import datos_grafica_barra
+from modulos.graphics import grafica_barra
 
 tips = sns.load_dataset("tips")
 
@@ -17,6 +19,10 @@ tips.to_csv('propinas.csv', sep=',', index=False, encoding='utf-8')
 
 columna_x ='total_bill'
 columna_y = 'tip'
+
+datos_tag = ['total_bill', 'tip', 'Propinas', 'total_bill', 'tip']
+
+grafica_barra(tips.head(20),datos_grafica_barra,datos_tag)
 
 regresion_lineal(tips,columna_x,columna_y)
 
