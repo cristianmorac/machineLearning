@@ -32,3 +32,13 @@ plt.ylabel(datos_grafica_barra['ylabel'])
 
 # Mostrar el gráfico en Streamlit
 st.pyplot(plt)
+
+# Creación del gráfico
+plt.figure(figsize=(8, 6))
+sns.barplot(x=datos_grafica_barra['columna_x'], y=datos_grafica_barra['columna_y'], data=dataframe)
+plt.title(datos_grafica_barra['title'])
+plt.xlabel(datos_grafica_barra['xlabel'])
+plt.ylabel(datos_grafica_barra['ylabel'])
+
+# Mostrar el gráfico en Streamlit
+st.pyplot(plt)
