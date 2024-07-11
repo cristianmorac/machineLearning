@@ -1,44 +1,70 @@
 import streamlit as st
-import matplotlib.pyplot as plt
-import seaborn as sns
-import pandas as pd
+import plotly.express as px
+import propinas.modulos as cd
+from propinas.modulos.clean_data import limpiar_datos
+from propinas.modulos.datos import replace_letra
 
-# Datos de ejemplo
-data = {
-    'columna_x': ['A', 'B', 'C', 'D'],
-    'columna_y': [10, 20, 15, 25],
-    'title': 'Título del Gráfico',
-    'xlabel': 'Eje X',
-    'ylabel': 'Eje Y'
-}
 
-dataframe = pd.DataFrame(data)
+st.set_page_config(layout="wide")
+# -- Create three columns
+col1, col2, col3 = st.columns([5, 5, 20])
+# -- Put the image in the middle column
+# - Commented out here so that the file will run without having the image downloaded
+# with col2:
+# st.image("streamlit.png", width=200)
+# -- Put the title in the last column
 
-# Configuración de los datos del gráfico
-datos_grafica_barra = {
-    'columna_x': 'columna_x',
-    'columna_y': 'columna_y',
-    'title': data['title'],
-    'xlabel': data['xlabel'],
-    'ylabel': data['ylabel']
-}
+# nombre del archivo
+archivo = 'Propina.xlsx'
 
-# Creación del gráfico
-plt.figure(figsize=(8, 6))
-sns.barplot(x=datos_grafica_barra['columna_x'], y=datos_grafica_barra['columna_y'], data=dataframe)
-plt.title(datos_grafica_barra['title'])
-plt.xlabel(datos_grafica_barra['xlabel'])
-plt.ylabel(datos_grafica_barra['ylabel'])
+# Crear dataframe de archivo excel
+data = cd.create_dataframe(archivo)
+#print(data)
 
-# Mostrar el gráfico en Streamlit
-st.pyplot(plt)
+# Formateo de datos
 
-# Creación del gráfico
-plt.figure(figsize=(8, 6))
-sns.barplot(x=datos_grafica_barra['columna_x'], y=datos_grafica_barra['columna_y'], data=dataframe)
-plt.title(datos_grafica_barra['title'])
-plt.xlabel(datos_grafica_barra['xlabel'])
-plt.ylabel(datos_grafica_barra['ylabel'])
+# reemplazar caracteres especiales
+data_clean = limpiar_datos(data, replace_letra)
 
-# Mostrar el gráfico en Streamlit
-st.pyplot(plt)
+with col3:
+    st.title("Streamlit Demo")
+    st.write("[Tutorial](https://jovid.win/crear-un-dashboard-con-streamlit/) - [Github](https://github.com/jdzuri/streamlit-dashboard)")
+# -- We use the first column here as a dummy to add a space to the left
+# -- Get the user input
+year_col, continent_col, log_x_col = st.columns([5, 5, 5])
+with year_col:
+    year_choice = st.slider(
+        "What year would you like to examine?",
+        min_value=1952,
+        max_value=2007,
+        step=5,
+        value=2007,
+    )
+with continent_col:
+    continent_choice = st.selectbox(
+        "What continent would you like to look at?",
+        ("All", "Asia", "Europe", "Africa", "Americas", "Oceania"),
+    )
+with log_x_col:
+    log_x_choice = st.checkbox("Log X Axis?")
+# -- Read in the data
+df = px.data.gapminder()
+# -- Apply the year filter given by the user
+filtered_df = df[(df.year == year_choice)]
+# -- Apply the continent filter
+if continent_choice != "All":
+    filtered_df = filtered_df[filtered_df.continent == continent_choice]
+# -- Create the figure in Plotly
+fig = px.scatter(
+    filtered_df,
+    x="gdpPercap",
+    y="lifeExp",
+    size="pop",
+    color="continent",
+    hover_name="country",
+    log_x=log_x_choice,
+    size_max=60,
+)
+fig.update_layout(title="GDP per Capita vs. Life Expectancy")
+# -- Input the Plotly chart to the Streamlit interface
+st.plotly_chart(fig, use_container_width=True)

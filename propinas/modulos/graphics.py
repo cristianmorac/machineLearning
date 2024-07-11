@@ -1,6 +1,7 @@
 # importaciones grafica
 import seaborn as sns
 import matplotlib.pyplot as plt
+import streamlit as st
 
 def grafico_regresion(data, column_x,column_y, predicciones, supervisado):
 
@@ -20,7 +21,10 @@ def grafico_regresion(data, column_x,column_y, predicciones, supervisado):
         plt.xlabel(f'{column_x}')
         plt.ylabel(f'{column_y}')
     plt.legend()
-    plt.show()
+    if supervisado == 'no':
+        st.pyplot(plt)
+    else:    
+        plt.show()
 
 
 def grafico_apilado(data,col_x,filter):
@@ -44,13 +48,6 @@ def grafico_apilado(data,col_x,filter):
     plt.xlabel(col_x)
     plt.ylabel(col_y)
     plt.legend(filter)
-    plt.show()
+    #plt.show()
+    st.pyplot(plt)
     
-    """ y3 = data2['count'][data2[col_y]== filter1]
-    y4 = data2['count'][data2[col_y]== filter2]
-
-    # Crear grafica
-    plt.bar(x,y3, color='r')
-    plt.bar(x,y4, bottom=y3, color='b')
-    plt.legend([filter1,filter2])
-    plt.show() """

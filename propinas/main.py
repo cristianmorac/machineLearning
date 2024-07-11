@@ -7,6 +7,8 @@ from modulos.static_data import no_supervisado,supervisado,Descriptiva, modelo_K
 # regresion lineal
 from sklearn.model_selection import train_test_split
 
+
+
 # nombre del archivo
 archivo = 'Propina.xlsx'
 
@@ -22,7 +24,7 @@ data_clean = limpiar_datos(data, replace_letra)
 
 # graficos
 
-# Apilado
+""" # Apilado
 momento_dia = ['Dinner', 'Lunch', 'momento_dia']
 fumadores = ['Yes', 'No','fumadores']
 
@@ -30,7 +32,7 @@ fumadores = ['Yes', 'No','fumadores']
 grafico_apilado(data_clean,'dia',fumadores)
 
 #Regresión lineal
-no_supervisado(data_clean,'total_factura','Propina') # funciona mejor
+no_supervisado(data_clean,'total_factura','Propina') # funciona mejor """
 
 # no supervidado
 col_x = 'Propina'
