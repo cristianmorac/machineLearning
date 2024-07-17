@@ -8,10 +8,10 @@ from propinas.modulos.graphics import grafico_apilado
 
 # Datframe
 # nombre del archivo
-archivo = 'Propina.xlsx'
-
+#archivo = 'Propina.xlsx'
+archivo = 'Propina'
 # Crear dataframe de archivo excel
-data = create_dataframe(archivo)
+data = create_dataframe(f'{archivo}.xlsx')
 #print(data)
 
 # Formateo de datos
