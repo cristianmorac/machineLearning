@@ -1,6 +1,7 @@
 from modulos.create_data import create_dataframe
 from modulos.clean_data import limpiar_datos, filas_Sin_datos
-from modulos.datos import replace_letra
+from modulos.datos import replace_letra, type_column
+
 
 #Estadstica
 from modulos.static_data import Descriptiva
@@ -41,12 +42,10 @@ with col2:
     st.write(data.head(3))
 
 st.title("Estadistica descriptiva")
-if data_choice == 'Propina':
-    valores_col = ['total_factura','Propina','mesa_cantidad']
-else:
-    valores_col = ['EDAD','PUNTAJE_GLOBAL','PUNT_COMP_CIUD','PUNT_COMU_ESCR','PUNT_INGLES','PUNT_LECT_CRIT']
+valores_col = type_column(data,columnas)
 decriptiva_col= st.selectbox("Consulta",(valores_col))
 
+# Estadisica descriptiva
 descriptiva = Descriptiva(data,decriptiva_col)
 df_descriptiva = pd.DataFrame([descriptiva])
 st.write(df_descriptiva)
@@ -63,7 +62,7 @@ with valorz_col:
     valorz_choice = st.selectbox("Valor en z",([valorx_choice,valory_choice,'COUNT']))
 
 data2 = data.groupby([valorx_choice, valory_choice]).size().reset_index(name='COUNT')
-fig = px.bar(data2.head(520),x=valorx_choice,y=valory_choice, color=valorz_choice)
+fig = px.bar(data2.head(520),x=valorx_choice,y=valory_choice, color=valorz_choice, text_auto=True)
 fig.update_layout(title=f"{valorx_choice} vs. {valory_choice}")
 # -- Input the Plotly chart to the Streamlit interface
 st.plotly_chart(fig, use_container_width=True)
@@ -93,8 +92,10 @@ st.plotly_chart(fig3, use_container_width=True)
 
 
 # KMeans
-col_x = 'mesa_cantidad'
-col_y = 'total_factura'
+""" col_x = 'mesa_cantidad'
+col_y = 'total_factura' """
+col_x = valorx_choice
+col_y = valory_choice
 
 st.title('Kmeans')
 datosKemans = data[[valorx_choice, valory_choice]]
@@ -114,16 +115,16 @@ etiquetas = kmeans.labels_
 # Mostrar clientes por cluster
 cluster0 = {}
 for i, mesa in enumerate(datosKemans3[etiquetas == 0]):
-    cluster0[f'Restaurante {i+1}'] = {
-        'frecuencia de facturas' : mesa[0],
-        'cantidad por mesa': mesa[1]
+    cluster0[f'Valores {i+1}'] = {
+        f'frecuencia de {valory_choice}' : mesa[0],
+        f'{valorx_choice}': mesa[1]
     }
 
 cluster1 = {}
 for i, mesa in enumerate(datosKemans3[etiquetas == 1]):
-    cluster1[f'Restaurante {i+1}'] = {
-        'frecuencia de facturas' : mesa[0],
-        'cantidad por mesa': mesa[1]
+    cluster1[f'Valores {i+1}'] = {
+        f'frecuencia de {valory_choice}' : mesa[0],
+        f'{valorx_choice}': mesa[1]
     }
 
 st.title('Clusster 0')
@@ -144,6 +145,6 @@ for etiqueta, color in zip(np.unique(etiquetas), colores):
 
 plt.xlabel(f'{col_y}')
 plt.ylabel(f'{col_x}')
-plt.title('Clustering de Clientes del Restaurante con K-means')
+plt.title('Clustering de datos con K-means')
 plt.legend()
 st.pyplot(plt)

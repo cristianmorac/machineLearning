@@ -1,4 +1,4 @@
-from modulos.static_data import supervisado, modelo_Knn, no_supervisado
+from modulos.static_data import supervisado, modelo_Knn
 import modulos.create_data as cd
 from modulos.clean_data import limpiar_datos
 from modulos.datos import replace_letra

@@ -15,3 +15,13 @@ replace_letra = {
     'Ã‘': 'Ñ',
     'Ã±': 'ñ'
 }
+
+# buscar columnas con numeros
+def type_column(data, columns):
+    tipo_datos = []
+    for c in columns:
+        data_type = data[c].dtypes
+        if data_type == 'int64':
+            tipo_datos.append(c)
+    
+    return tipo_datos
