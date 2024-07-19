@@ -12,9 +12,8 @@ import streamlit as st
 import plotly.express as px
 import matplotlib.pyplot as plt
 
-# regresion lineal
-from sklearn.model_selection import train_test_split
-from modulos.static_data import no_supervisado, Descriptiva
+# Estadistica
+from modulos.static_data import Descriptiva
 
 # KMeans
 from sklearn.cluster import KMeans
@@ -59,17 +58,16 @@ with valory_col:
     columnas2.remove(valorx_choice)
     valory_choice = st.selectbox("Valor en y",(columnas))
 with valorz_col:
-    valorz_choice = st.selectbox("Valor en z",([valorx_choice,valory_choice,'COUNT']))
+    valorz_choice = st.selectbox("Colores",([valorx_choice,valory_choice]))
 
 data2 = data.groupby([valorx_choice, valory_choice]).size().reset_index(name='COUNT')
-fig = px.bar(data2.head(520),x=valorx_choice,y=valory_choice, color=valorz_choice, text_auto=True)
+fig = px.bar(data2,x=valorx_choice,y=valory_choice, color=valorz_choice, text_auto=True)
 fig.update_layout(title=f"{valorx_choice} vs. {valory_choice}")
 # -- Input the Plotly chart to the Streamlit interface
 st.plotly_chart(fig, use_container_width=True)
 
 st.title("Grafico Pastel")
-
-fg2 = px.pie(data2.head(520),names=valorx_choice, values=valory_choice, color=valorz_choice)
+fg2 = px.pie(data2,names=valorx_choice, values=valory_choice, color=valorz_choice)
 fg2.update_layout(title=f"{valorx_choice} vs. {valory_choice}")
 # -- Input the Plotly chart to the Streamlit interface
 st.plotly_chart(fg2, use_container_width=True)
@@ -92,19 +90,14 @@ st.plotly_chart(fig3, use_container_width=True)
 
 
 # KMeans
-""" col_x = 'mesa_cantidad'
-col_y = 'total_factura' """
-col_x = valorx_choice
-col_y = valory_choice
-
 st.title('Kmeans')
 datosKemans = data[[valorx_choice, valory_choice]]
 kmeans = KMeans(n_clusters=2)
 kmeans.fit(datosKemans)
 etiquetas = kmeans.labels_
-data_group = data.groupby([col_x, col_y]).size().reset_index(name='count')
-result = data_group.groupby(col_x).sum().reset_index()
-datosKemans2 = result[['count', col_x]]
+data_group = data.groupby([valorx_choice, valory_choice]).size().reset_index(name='count')
+result = data_group.groupby(valorx_choice).sum().reset_index()
+datosKemans2 = result[['count', valorx_choice]]
 datosKemans3 = np.array(datosKemans2)
 
 # Aplicar K-means
@@ -143,8 +136,8 @@ for etiqueta, color in zip(np.unique(etiquetas), colores):
     puntos = datosKemans3[etiquetas == etiqueta]
     plt.scatter(puntos[:, 0], puntos[:, 1], color=color, label=f'Cluster {etiqueta}')
 
-plt.xlabel(f'{col_y}')
-plt.ylabel(f'{col_x}')
+plt.xlabel(f'{valory_choice}')
+plt.ylabel(f'{valorx_choice}')
 plt.title('Clustering de datos con K-means')
 plt.legend()
 st.pyplot(plt)
